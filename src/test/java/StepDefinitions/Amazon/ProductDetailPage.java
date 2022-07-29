@@ -8,6 +8,7 @@ import PageObject.Amazon.SideBar;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -15,8 +16,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 
 public class ProductDetailPage extends TestBase {
-
-    private WebDriverWait wait;
 
     private AmazonHome homePage;
     private SideBar sideBar;
