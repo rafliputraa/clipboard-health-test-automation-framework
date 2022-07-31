@@ -15,13 +15,15 @@ Clipboard Health Test Automation Framework combines environment variables common
 
 ## <a id="installation"></a>Installation
 
+Execute this command on your terminal or CMD:
+
 ```bash
 git pull https://github.com/rafliputraa/clipboard-health-test-automation-framework.git
 ```
 
 ## <a id="usage"></a>Usage
 
-Execute command with the following values:
+Execute command with the following values on your terminal or CMD:
 *   Chrome
 ```bash
 mvn test -Dbrowser=chrome
