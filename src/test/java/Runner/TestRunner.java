@@ -23,7 +23,7 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     @AfterTest
     public void teardown()
     {
-        TestBase.logger.debug("Test Finished");
         TestBase.quit();
+        TestBase.logger.debug("Test Finished");
     }
 }

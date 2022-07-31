@@ -1,5 +1,6 @@
 package Base;
 
+import Utility.ParamManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import Utility.ConstantVariables;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,42 +30,49 @@ public class TestBase {
 
     public static WebDriver initilize() throws MalformedURLException {
 
+        ParamManager paramManager = new ParamManager();
+        paramManager.setParameter("browser");
+
+        String browserName = ConstantVariables.browserName;
         //Use Of Singleton Concept and Initilize webDriver
         if(driver == null)
         {
-            if(ConstantVariables.browserName.equalsIgnoreCase("chrome"))
+            if(browserName.equalsIgnoreCase("chrome"))
             {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             }
-            else if(ConstantVariables.browserName.equalsIgnoreCase("chrome-headless"))
+            else if(browserName.equalsIgnoreCase("chrome-headless"))
             {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
-                options.setHeadless(true);
+                options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors","--disable-extensions","--no-sandbox","--disable-dev-shm-usage");
                 driver=new ChromeDriver(options);
             }
-            else if(ConstantVariables.browserName.equalsIgnoreCase("firefox"))
+            else if(browserName.equalsIgnoreCase("firefox"))
             {
                 WebDriverManager.firefoxdriver().setup();
                 driver=new FirefoxDriver();
             }
-            else if(ConstantVariables.browserName.equalsIgnoreCase("firefox-headless"))
+            else if(browserName.equalsIgnoreCase("firefox-headless"))
             {
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions options = new FirefoxOptions();
-                options.setHeadless(true);
-                driver=new FirefoxDriver();
+                options.addArguments("--headless");
+                options.addArguments("--disable-web-security");
+                options.addArguments("--allow-running-insecure-content");
+                driver=new FirefoxDriver(options);
             }
-            else if(ConstantVariables.browserName.equalsIgnoreCase("IE"))
+            else if(browserName.equalsIgnoreCase("internet-explorer"))
             {
                 WebDriverManager.iedriver().setup();
                 driver=new EdgeDriver();
             }
-
-            logger = Logger.getLogger("EasyLogger");
-
         }
+
+        //Define the logger
+        logger = Logger.getLogger("EasyLogger");
+        logger.debug("Browser: " + browserName);
 
         //Perform Basic Operations
         driver.manage().deleteAllCookies();

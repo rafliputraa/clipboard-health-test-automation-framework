@@ -3,7 +3,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="TestSuite">
-    <test name="TestSuite" preserve-order="true" thread-count="10" parallel="methods">
+    <test name="TestSuite" thread-count="10" parallel="methods">
         <classes>
             <class name="Runner.TestRunner"/>
         </classes>
